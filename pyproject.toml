@@ -9,6 +9,7 @@ readme = "README.md"
 python = "3.10"
 huspacy = "^0.10.1"
 textacy = "^0.13.0"
+torch = "2.0.0"
 
 
 [build-system]

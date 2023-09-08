@@ -1,9 +1,9 @@
 import spacy
 import huspacy
-#import textacy
+import textacy
 
-if not spacy.util.is_package("hu_core_news_md"):
-    huspacy.download("hu_core_news_md")
+if not spacy.util.is_package("hu_core_news_lg"):
+    huspacy.download("hu_core_news_lg")
 
 nlp = huspacy.load()
 
@@ -11,6 +11,16 @@ nlp = huspacy.load()
 ########################################################################################################################
 #####                                                Common helper functions                                       #####
 ########################################################################################################################
+def _clean_up_text(strng):
+    """Remove >>exotic<< characters that confuse NER"""
+    bad_chars = "“#$%&'()*+\"-—"
+    for bad_char in bad_chars:
+        strng = strng.replace(bad_char, " ")
+    strng = strng.split()
+    strng = [e.strip() for e in strng]
+    return " ".join(strng)
+
+
 def _remove_overlappings(lst):
     """Remove overlapping strings from lst"""
     lst.sort(key=len)
@@ -57,7 +67,7 @@ def extract_keywords(article):
     yake = textacy.extract.keyterms.yake(
         doc,
         normalize="lemma",
-        ngrams=(3, 4),
+        ngrams=(2, 3),
         include_pos=["NOUN", "PROPN", "ADJ"],
         window_size=3,
         topn=no_keywords,
@@ -68,7 +78,7 @@ def extract_keywords(article):
     sgrank = textacy.extract.keyterms.sgrank(
         doc,
         normalize="lemma",
-        ngrams=(1, 2, 3, 4, 5, 6),
+        ngrams=(1, 2, 3),
         include_pos=["NOUN", "PROPN", "ADJ"],
         window_size=3000,
         topn=no_keywords,

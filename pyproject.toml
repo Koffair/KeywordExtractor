@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "radioshipkeywordextractor"
+version = "0.1.0"
+description = ""
+authors = ["Zoltan Varju <zoltan.varju@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.10"
+huspacy = "^0.10.1"
+textacy = "^0.13.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

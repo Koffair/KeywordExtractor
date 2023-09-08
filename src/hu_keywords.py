@@ -18,7 +18,7 @@ def _clean_up_text(strng):
         strng = strng.replace(bad_char, " ")
     strng = strng.split()
     strng = [e.strip() for e in strng]
-    return " ".join(strng)
+    return " ".join(strng).lower()
 
 
 def _remove_overlappings(lst):
